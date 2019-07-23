@@ -56,28 +56,61 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
+runners.forEach(function(r){
+    fullName.push(r.first_name +" "+ r.last_name);
+});
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
-let allCaps = [];
+let allCaps = runners.map(function(r){
+    return r.first_name.toUpperCase();
+});
+
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-let largeShirts = [];
+let largeShirts = runners.filter(function(r){
+    return r.shirt_size==="L";
+});
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
+let ticketPriceTotal = runners.reduce(function(donationSum, r){
+    return donationSum + r.donation;
+},0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
-
+// who donated more than $100
+const runnersDonatedLarger100 = runners.filter(function(r){
+    return r.donation>100;
+});
+console.log(runnersDonatedLarger100);
 // Problem 2
-
+// what is the largest amount of donation.
+const runnerDonatedMax =runners.reduce(function(max, r){
+    if(r.donation>max){
+        max =r.donation;
+    }
+    return max;
+},0);
+console.log(runnerDonatedMax);
 // Problem 3
+// who come from which company?
+const companyName = "Lazzy";
+const runnersByCompany = runners.filter(function(r){
+    
+        return r.company_name===companyName;
+    
+});
+if(runnersByCompany.length==0){
+    console.log(`No one comes from ${companyName}.`);
+}else{
+    console.log(runnersByCompany);
+}
