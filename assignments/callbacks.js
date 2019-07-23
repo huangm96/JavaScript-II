@@ -70,10 +70,23 @@ contains("Gum", items, function(item, list){
     }
   }
 });
+
 /* STRETCH PROBLEM */
 
 function removeDuplicates(array, cb) {
   // removeDuplicates removes all duplicate values from the given array.
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
+  return cb(array);
 }
+
+removeDuplicates(items,function(list){
+  const newArray=[];
+  newArray.push(list[0]);
+    for(let i=1;i<list.length;i++){
+      if(!newArray.includes(list[i])){
+        newArray.push(list[i]);
+      }
+    }
+    console.log(newArray);
+});
